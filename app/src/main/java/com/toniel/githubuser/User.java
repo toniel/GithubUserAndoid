@@ -1,139 +1,166 @@
 package com.toniel.githubuser;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class User {
-
-	@SerializedName("gists_url")
-	private String gistsUrl;
-
-	@SerializedName("repos_url")
-	private String reposUrl;
-
-	@SerializedName("following_url")
-	private String followingUrl;
-
-	@SerializedName("starred_url")
-	private String starredUrl;
+public class User implements Parcelable{
 
 	@SerializedName("login")
 	private String login;
-
-	@SerializedName("followers_url")
-	private String followersUrl;
-
-	@SerializedName("type")
-	private String type;
-
-	@SerializedName("url")
-	private String url;
-
-	@SerializedName("subscriptions_url")
-	private String subscriptionsUrl;
-
-	@SerializedName("score")
-	private double score;
-
-	@SerializedName("received_events_url")
-	private String receivedEventsUrl;
-
 	@SerializedName("avatar_url")
 	private String avatarUrl;
-
-	@SerializedName("events_url")
-	private String eventsUrl;
-
 	@SerializedName("html_url")
 	private String htmlUrl;
-
-	@SerializedName("site_admin")
-	private boolean siteAdmin;
-
 	@SerializedName("id")
 	private int id;
-
 	@SerializedName("gravatar_id")
 	private String gravatarId;
-
 	@SerializedName("node_id")
 	private String nodeId;
-
 	@SerializedName("organizations_url")
 	private String organizationsUrl;
+	@SerializedName("twitter_username")
+	private String twitterUsername;
+	@SerializedName("bio")
+	private String bio;
+	@SerializedName("blog")
+	private String blog;
+	@SerializedName("company")
+	private String company;
+	@SerializedName("public_repos")
+	private int publicRepos;
 
-	public String getGistsUrl(){
-		return gistsUrl;
+	@SerializedName("followers")
+	private int followers;
+
+	@SerializedName("following")
+	private int following;
+
+	@SerializedName("name")
+	private String name;
+
+	@SerializedName("location")
+	private String location;
+
+	protected User(Parcel in) {
+		login = in.readString();
+		avatarUrl = in.readString();
+		htmlUrl = in.readString();
+		id = in.readInt();
+		gravatarId = in.readString();
+		nodeId = in.readString();
+		organizationsUrl = in.readString();
+		twitterUsername = in.readString();
+		bio = in.readString();
+		blog = in.readString();
+		company = in.readString();
+		publicRepos = in.readInt();
+		followers = in.readInt();
+		following = in.readInt();
+		name = in.readString();
+		location = in.readString();
 	}
 
-	public String getReposUrl(){
-		return reposUrl;
-	}
+	public static final Creator<User> CREATOR = new Creator<User>() {
+		@Override
+		public User createFromParcel(Parcel in) {
+			return new User(in);
+		}
 
-	public String getFollowingUrl(){
-		return followingUrl;
-	}
+		@Override
+		public User[] newArray(int size) {
+			return new User[size];
+		}
+	};
 
-	public String getStarredUrl(){
-		return starredUrl;
-	}
-
-	public String getLogin(){
+	public String getLogin() {
 		return login;
 	}
 
-	public String getFollowersUrl(){
-		return followersUrl;
-	}
-
-	public String getType(){
-		return type;
-	}
-
-	public String getUrl(){
-		return url;
-	}
-
-	public String getSubscriptionsUrl(){
-		return subscriptionsUrl;
-	}
-
-	public double getScore(){
-		return score;
-	}
-
-	public String getReceivedEventsUrl(){
-		return receivedEventsUrl;
-	}
-
-	public String getAvatarUrl(){
+	public String getAvatarUrl() {
 		return avatarUrl;
 	}
 
-	public String getEventsUrl(){
-		return eventsUrl;
-	}
-
-	public String getHtmlUrl(){
+	public String getHtmlUrl() {
 		return htmlUrl;
 	}
 
-	public boolean isSiteAdmin(){
-		return siteAdmin;
-	}
-
-	public int getId(){
+	public int getId() {
 		return id;
 	}
 
-	public String getGravatarId(){
+	public String getGravatarId() {
 		return gravatarId;
 	}
 
-	public String getNodeId(){
+	public String getNodeId() {
 		return nodeId;
 	}
 
-	public String getOrganizationsUrl(){
+	public String getOrganizationsUrl() {
 		return organizationsUrl;
+	}
+
+	public String getTwitterUsername() {
+		return twitterUsername;
+	}
+
+	public String getBio() {
+		return bio;
+	}
+
+	public String getBlog() {
+		return blog;
+	}
+
+	public String getCompany() {
+		return company;
+	}
+
+	public int getPublicRepos() {
+		return publicRepos;
+	}
+
+	public int getFollowers() {
+		return followers;
+	}
+
+	public int getFollowing() {
+		return following;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel parcel, int i) {
+		parcel.writeString(login);
+		parcel.writeString(avatarUrl);
+		parcel.writeString(htmlUrl);
+		parcel.writeInt(id);
+		parcel.writeString(gravatarId);
+		parcel.writeString(nodeId);
+		parcel.writeString(organizationsUrl);
+		parcel.writeString(twitterUsername);
+		parcel.writeString(bio);
+		parcel.writeString(blog);
+		parcel.writeString(company);
+		parcel.writeInt(publicRepos);
+		parcel.writeInt(followers);
+		parcel.writeInt(following);
+		parcel.writeString(name);
+		parcel.writeString(location);
 	}
 }

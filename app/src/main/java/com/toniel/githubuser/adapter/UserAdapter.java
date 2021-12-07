@@ -1,5 +1,6 @@
 package com.toniel.githubuser.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.toniel.githubuser.DetailUserActivity;
+import com.toniel.githubuser.MainActivity;
 import com.toniel.githubuser.R;
 import com.toniel.githubuser.User;
 
@@ -18,6 +21,10 @@ import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     private List<User> users;
+    public OnItemClickCallback onItemClickCallback;
+    public void setOnItemClickCallback(OnItemClickCallback onItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback;
+    }
 
     public UserAdapter(List<User> users) {
         this.users = users;
@@ -35,7 +42,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         holder.tvUsername.setText(users.get(position).getLogin());
         Glide.with(holder.itemView.getContext())
                 .load(users.get(position).getAvatarUrl())
+                .circleCrop()
                 .into(holder.imgGravatar);
+        holder.itemView.setOnClickListener(view -> {
+           onItemClickCallback.onItemClicked(users.get(position));
+        });
 
     }
 
@@ -51,6 +62,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             super(itemView);
             imgGravatar = itemView.findViewById(R.id.img_gravatar);
             tvUsername = itemView.findViewById(R.id.tv_username);
+
         }
+    }
+
+    public interface OnItemClickCallback{
+        void onItemClicked(User data);
     }
 }

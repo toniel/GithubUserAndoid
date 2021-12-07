@@ -19,8 +19,8 @@
 
         <ImageView
             android:id="@+id/img_gravatar"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
@@ -34,11 +34,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+
             android:layout_marginEnd="8dp"
-            android:layout_toEndOf="@id/img_gravatar"
-            android:textSize="16sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.0"
             card_view:layout_constraintStart_toEndOf="@+id/img_gravatar"
             card_view:layout_constraintTop_toTopOf="@+id/img_gravatar"
             tools:text="@string/username" />

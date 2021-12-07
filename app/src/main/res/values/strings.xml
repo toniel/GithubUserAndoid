@@ -3,5 +3,12 @@
     <string name="search">search</string>
     <string name="search_hint">Masukkan Username</string>
     <string name="username">username</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="folower_fragment">Follower Fragment</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="following_fragment">Following Fragment</string>
+    <string name="tab_text_follower">Follower</string>
+    <string name="tab_text_following">Following</string>
+    <string name="name">name</string>
 
 </resources>
