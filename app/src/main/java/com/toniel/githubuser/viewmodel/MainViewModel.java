@@ -6,11 +6,9 @@ import android.widget.Toast;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
 
-import com.toniel.githubuser.MainActivity;
-import com.toniel.githubuser.User;
-import com.toniel.githubuser.UserResponse;
+import com.toniel.githubuser.model.User;
+import com.toniel.githubuser.model.UserResponse;
 import com.toniel.githubuser.config.ApiConfig;
 
 import java.util.List;
@@ -21,42 +19,50 @@ import retrofit2.Response;
 
 public class MainViewModel extends ViewModel {
     private static final String TAG = "MainViewModel";
-    private MutableLiveData<List<User>> users;
-    private String username;
-
-
-    public LiveData<List<User>> getUsers(String username){
-        if (users==null){
-            users = new MutableLiveData<List<User>>();
-            loadUsers(username);
-        }
-        return users;
+    private final MutableLiveData<List<User>> _users = new MutableLiveData<>();
+    public LiveData<List<User>> getUsers(){
+        return _users;
     }
 
+    private final MutableLiveData<Boolean> _isLoading = new MutableLiveData<>();
+    public LiveData<Boolean> isLoading(){
+        return _isLoading;
+    }
 
+    private final MutableLiveData<String> toastMessage = new MutableLiveData<>();
+    public LiveData<String> getToastMessage(){
+        return toastMessage;
+    }
 
-    private void loadUsers(String username) {
+    public final void getGithubUser(String username){
+        _isLoading.setValue(true);
         Call<UserResponse> client = ApiConfig.getApiService().getUsers(username);
         client.enqueue(new Callback<UserResponse>() {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                _isLoading.setValue(false);
                 if (response.isSuccessful()){
-                    if (response.body()!=null){
-                        users.setValue(response.body().getItems());
+
+                    if (response.body().getTotalCount()==0){
+                        Log.d(TAG,"user not found");
+                        toastMessage.setValue("User not found");
+
+                    }else{
+                        _users.setValue(response.body().getItems());
                     }
-                }else{
-                    if (response.body() != null) {
-                        Log.e(TAG, "onFailure: gagal");
-                    }
+
+
                 }
             }
 
             @Override
             public void onFailure(Call<UserResponse> call, Throwable t) {
-                Log.e(TAG, t.getMessage());
+                _isLoading.setValue(false);
+                Log.e(TAG, "onFailure: " + t.getMessage());
             }
         });
     }
+
 
 
 }

@@ -1,6 +1,5 @@
 package com.toniel.githubuser.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.toniel.githubuser.OtherUserResponseItem;
+import com.toniel.githubuser.model.OtherUserResponseItem;
 import com.toniel.githubuser.R;
 
 import java.util.List;
 
 public class OtherUserAdapter extends RecyclerView.Adapter<OtherUserAdapter.ViewHolder> {
 
-    private List<OtherUserResponseItem> otherUsers;
+    private final List<OtherUserResponseItem> otherUsers;
 
     public OtherUserAdapter(List<OtherUserResponseItem> otherUsers) {
         this.otherUsers = otherUsers;
@@ -36,7 +35,6 @@ public class OtherUserAdapter extends RecyclerView.Adapter<OtherUserAdapter.View
     @Override
     public void onBindViewHolder(@NonNull OtherUserAdapter.ViewHolder holder, int position) {
         holder.tvUsername.setText(otherUsers.get(position).getLogin());
-//        holder.
         Glide.with(holder.imgAvatar.getContext())
                 .load(otherUsers.get(position).getAvatarUrl())
                 .circleCrop()
@@ -57,7 +55,6 @@ public class OtherUserAdapter extends RecyclerView.Adapter<OtherUserAdapter.View
             super(itemView);
             imgAvatar = itemView.findViewById(R.id.img_gravatar);
             tvUsername = itemView.findViewById(R.id.tv_username);
-//            tvName = itemView.findViewById(R.id.tv_name);
 
         }
     }

@@ -1,13 +1,12 @@
 package com.toniel.githubuser.adapter;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.toniel.githubuser.FollowerFragment;
-import com.toniel.githubuser.FollowingFragment;
+import com.toniel.githubuser.fragment.FollowerFragment;
+import com.toniel.githubuser.fragment.FollowingFragment;
 
 public class SectionsPagerAdapter extends FragmentStateAdapter {
 

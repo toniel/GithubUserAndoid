@@ -1,9 +1,8 @@
 package com.toniel.githubuser.service;
 
-import com.toniel.githubuser.OtherUserResponse;
-import com.toniel.githubuser.OtherUserResponseItem;
-import com.toniel.githubuser.User;
-import com.toniel.githubuser.UserResponse;
+import com.toniel.githubuser.model.OtherUserResponseItem;
+import com.toniel.githubuser.model.User;
+import com.toniel.githubuser.model.UserResponse;
 
 import java.util.List;
 
